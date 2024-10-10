@@ -1,0 +1,24 @@
+{
+  "name": "@mono/app1",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@mono/bar": "^0.0.1",
+    "@mono/foo": "^0.0.1",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "typescript": "~5.5.2",
+    "vite": "^5.0.0",
+    "vitest": "^1.3.1",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vue-tsc": "^2.0.0"
+  }
+}

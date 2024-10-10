@@ -1,0 +1,14 @@
+{
+  "name": "mono",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' + && find . -name 'build' -type d -prune -exec rm -rf '{}' +"
+  },
+  "workspaces": [
+    "packages/*",
+    "libs/*",
+    "apps/*"
+  ]
+}
