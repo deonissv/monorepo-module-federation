@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const { DefinePlugin } = require("webpack");
+const { FederatedTypesPlugin } = require("@module-federation/typescript");
+const federationConfig = require("./federation.config");
 
 const tsconfig = "tsconfig.json";
 
@@ -69,21 +71,11 @@ module.exports = {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
     }),
     new ModuleFederationPlugin({
-      name: "app1",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./App": "./src/app/App",
-      },
-      // shared: {
-      //   react: {
-      //     eager: true,
-      //     singleton: true,
-      //   },
-      //   "react-dom": {
-      //     eager: true,
-      //     singleton: true,
-      //   },
-      // },
+      ...federationConfig,
+    }),
+    new FederatedTypesPlugin({
+      federationConfig: federationConfig,
+      compiler: "vue-tsc",
     }),
   ],
 };

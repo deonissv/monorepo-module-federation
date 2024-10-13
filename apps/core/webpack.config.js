@@ -4,10 +4,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const { DefinePlugin } = require("webpack");
+const { FederatedTypesPlugin } = require("@module-federation/typescript");
+const federationConfig = require("./federation.config");
 
 const tsconfig = "tsconfig.json";
-
-const app1URL = "http://localhost:5501";
 
 module.exports = {
   mode: "development",
@@ -71,11 +71,11 @@ module.exports = {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
     }),
     new ModuleFederationPlugin({
-      name: "core",
-      filename: "remoteEntry.js",
-      remotes: {
-        app1: `app1@${app1URL}/remoteEntry.js`,
-      },
+      ...federationConfig,
+    }),
+    new FederatedTypesPlugin({
+      federationConfig: federationConfig,
+      compiler: "vue-tsc",
     }),
   ],
 };
