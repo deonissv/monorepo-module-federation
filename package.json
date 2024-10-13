@@ -10,5 +10,8 @@
     "packages/*",
     "libs/*",
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@vue/cli": "^5.0.8"
+  }
 }

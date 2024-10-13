@@ -1,7 +1,7 @@
 {
-  "name": "@mono/app1",
-  "version": "0.0.1",
-  "main": "./index.js",
+  "name": "@mono/core",
+  "version": "1.0.0",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "build": "webpack build",
@@ -18,7 +18,6 @@
     "@vitejs/plugin-vue": "^4.5.0",
     "@vue/compiler-sfc": "^3.5.11",
     "css-loader": "^7.1.2",
-    "express": "^4.21.1",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
@@ -30,7 +29,6 @@
     "vue-loader": "^17.4.2",
     "vue-tsc": "^2.1.6",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-middleware": "^7.4.2",
     "webpack-dev-server": "^5.1.0",
     "webpack-node-externals": "^3.0.0"
   }
