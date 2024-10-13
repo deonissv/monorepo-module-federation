@@ -4,11 +4,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const { DefinePlugin } = require("webpack");
+const { dependencies } = require("./package.json");
 
 const tsconfig = "tsconfig.json";
+const isProd = true;
 
 module.exports = {
-  mode: "development",
+  mode: isProd ? "production" : "development",
   entry: "./src/main.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -16,7 +18,7 @@ module.exports = {
     clean: true,
     publicPath: "auto",
   },
-  devtool: "source-map",
+  devtool: isProd ? undefined : "source-map",
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
@@ -74,16 +76,24 @@ module.exports = {
       exposes: {
         "./App": "./src/app/App",
       },
-      // shared: {
-      //   react: {
-      //     eager: true,
-      //     singleton: true,
-      //   },
-      //   "react-dom": {
-      //     eager: true,
-      //     singleton: true,
-      //   },
-      // },
+      shared: {
+        vue: {
+          import: false,
+          singleton: true,
+          requiredVersion: dependencies["vue"],
+          strictVersion: true,
+        },
+        "@mono/foo": {
+          singleton: true,
+          requiredVersion: dependencies["@mono/foo"],
+          strictVersion: true,
+        },
+        "@mono/bar": {
+          singleton: true,
+          requiredVersion: dependencies["@mono/bar"],
+          strictVersion: true,
+        },
+      },
     }),
   ],
 };

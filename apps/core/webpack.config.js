@@ -4,13 +4,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const { DefinePlugin } = require("webpack");
+const { dependencies } = require("./package.json");
 
 const tsconfig = "tsconfig.json";
+const isProd = true;
 
 const app1URL = "http://localhost:5501";
 
 module.exports = {
-  mode: "development",
+  mode: isProd ? "production" : "development",
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -18,7 +20,8 @@ module.exports = {
     publicPath: "auto",
     clean: true,
   },
-  devtool: "source-map",
+  devtool: isProd ? undefined : "source-map",
+
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
@@ -75,6 +78,26 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         app1: `app1@${app1URL}/remoteEntry.js`,
+      },
+      shared: {
+        vue: {
+          eager: true,
+          singleton: true,
+          requiredVersion: dependencies["vue"],
+          strictVersion: true,
+        },
+        "@mono/foo": {
+          eager: true,
+          singleton: true,
+          requiredVersion: dependencies["@mono/foo"],
+          strictVersion: true,
+        },
+        "@mono/bar": {
+          eager: true,
+          singleton: true,
+          requiredVersion: dependencies["@mono/bar"],
+          strictVersion: true,
+        },
       },
     }),
   ],

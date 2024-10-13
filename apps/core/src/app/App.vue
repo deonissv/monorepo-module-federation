@@ -20,7 +20,9 @@ const App1 = defineAsyncComponent({
     <div class="header-item header-item-3"><h3>Item 3</h3></div>
     <div class="header-item header-item-4"><h3>Item 4</h3></div>
   </div>
-  <App1 />
+  <div>
+    <App1 />
+  </div>
 </template>
 
 <style scoped>

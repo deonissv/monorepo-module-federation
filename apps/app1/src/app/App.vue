@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { isOdd } from '@libs/is-odd';
+
 import { bar } from '@mono/bar';
 import { foo } from '@mono/foo';
 
