@@ -2,21 +2,30 @@ import fs from 'node:fs/promises';
 import express from 'express';
 import { render } from './render';
 
-// Constants
 const PORT = 5173;
-
-// Cached production assets
 const template = await fs.readFile(`./dist/client/index.html`, 'utf-8');
+
+const getTitles = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const titles = await response.json();
+  return titles.map((title: any) => title.title);
+};
 
 const app = express();
 app.use('/static', express.static('./dist/client'));
 
-// Serve HTML
 app.get('/', async (req, res) => {
   try {
-    const rendered = await render();
+    const titles = await getTitles();
+    const ctx = {
+      titles: titles.slice(0, 4),
+    };
 
-    const html = template.replace(`<!--app-html-->`, rendered.html ?? '');
+    const rendered = await render(ctx);
+
+    const html = template
+      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(`<!--store-data-->`, `<script>window.__INITIAL_DATA__ = ${JSON.stringify(ctx)}</script>`);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
   } catch (e) {
@@ -25,7 +34,6 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Start http server
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });

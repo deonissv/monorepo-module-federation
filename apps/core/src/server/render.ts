@@ -1,10 +1,9 @@
 import { renderToString } from 'vue/server-renderer';
 import { createApp } from '../bootstrap';
 
-export async function render() {
+export async function render(ctx = {}) {
   const { app } = createApp();
 
-  const ctx = {};
   const html = await renderToString(app, ctx);
 
   return { html };

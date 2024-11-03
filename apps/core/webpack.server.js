@@ -4,6 +4,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { UniversalFederationPlugin } = require('@module-federation/node');
 const { DefinePlugin } = require('webpack');
 const { dependencies } = require('./package.json');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const tsconfig = 'tsconfig.json';
 const isProd = true;
@@ -49,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -59,6 +60,9 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
     new DefinePlugin({
       __VUE_OPTIONS_API__: 'true',
       __VUE_PROD_DEVTOOLS__: 'false',

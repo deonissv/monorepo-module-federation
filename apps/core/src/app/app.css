@@ -1,0 +1,27 @@
+.header {
+    display:  flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .header-item {
+    width: 100%;
+    text-align: center;
+  }
+
+
+  .header-item-1 {
+    background-color: aqua;
+  }
+
+  .header-item-2 {
+    background-color: bisque;
+  }
+
+  .header-item-3 {
+    background-color: cadetblue ;
+  }
+
+  .header-item-4 {
+    background-color: violet ;
+  }
