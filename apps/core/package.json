@@ -4,8 +4,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "webpack build",
-    "start": "webpack serve"
+    "start": "npm run build && npm run serve",
+    "build": "npm run build:c && npm run build:s",
+    "serve": "webpack serve",
+    "build:c": "webpack --config webpack.client.js",
+    "build:s": "webpack --config webpack.server.js"
   },
   "dependencies": {
     "@mono/bar": "^0.0.1",
@@ -13,6 +16,8 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@module-federation/enhanced": "^0.6.15",
+    "@module-federation/node": "^2.6.3",
     "@types/node": "^22.7.5",
     "@vitejs/plugin-vue": "^4.5.0",
     "@vue/compiler-sfc": "^3.5.11",
