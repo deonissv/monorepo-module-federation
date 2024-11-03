@@ -22,13 +22,6 @@ module.exports = {
     publicPath: 'auto',
   },
   devtool: isProd ? undefined : 'source-map',
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 5501,
-  },
   resolve: {
     extensions: ['.vue', '.tsx', '.ts', '.js'],
     fallback: {

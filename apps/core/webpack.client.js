@@ -24,14 +24,6 @@ module.exports = {
     clean: true,
   },
   devtool: isProd ? undefined : 'source-map',
-
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 5500,
-  },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     fallback: {
