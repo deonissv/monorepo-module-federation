@@ -6,27 +6,29 @@
   "scripts": {
     "start": "npm run build && npm run serve",
     "build": "npm run build:c && npm run build:s",
-    "serve": "webpack serve",
+    "serve": "node dist/server/main.js",
     "build:c": "webpack --config webpack.client.js",
     "build:s": "webpack --config webpack.server.js"
   },
   "dependencies": {
     "@mono/bar": "^0.0.1",
     "@mono/foo": "^0.0.1",
+    "express": "^4.21.1",
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@module-federation/enhanced": "^0.6.15",
     "@module-federation/node": "^2.6.3",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.5",
     "@vitejs/plugin-vue": "^4.5.0",
     "@vue/compiler-sfc": "^3.5.11",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.1",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "mini-css-extract-plugin": "^2.9.1",
     "typescript": "~5.5.2",
     "vite": "^5.0.0",
     "vite-tsconfig-paths": "^4.3.2",
